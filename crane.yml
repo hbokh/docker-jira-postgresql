@@ -1,0 +1,13 @@
+containers:
+  postgresql:
+    image: paintedfox/postgresql
+    run:
+        env: ["USER=super", "DB=jiradb", "PASS=p4ssw0rd"]
+        volumes-from: ["datastore"]
+        detach: true
+  jira: 
+    image: hbokh/docker-jira
+    run:
+        publish: ["8080:8080"]
+        link: ["postgresql:db"]
+        detach: true
