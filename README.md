@@ -40,7 +40,9 @@ Check file `crane.yml` and use `crane lift` to start the containers.
 ## Next
 
 Connect to http:// < container IP >:8080/ and setup JIRA.  
-With the above set credentials, database is named "jiradb", user is "super" and password is "p4ssw0rd".
+With the above set credentials, hostname is "db", database is named "jiradb", user is "super" and password is "p4ssw0rd".
+
+![image](https://raw.githubusercontent.com/hbokh/docker-jira-postgresql/master/JIRA-Set_Up_Database.png)
 
 ## Other
 
