@@ -1,6 +1,6 @@
-# Docker JIRA on PostgreSQL
+# Dockerized JIRA on PostgreSQL
 
-Three containers with Atlassian [JIRA](https://www.atlassian.com/software/jira), v6.3.x, PostgreSQL and data-volume.
+Atlassian [JIRA](https://www.atlassian.com/software/jira), v6.3.x, PostgreSQL and data-volume.
 
 Most of this is based on [HouseOfAgile/docker-jira](https://github.com/HouseOfAgile/docker-jira), but since there were too many issues with MySQL (e.g. `impossible to write to binary log since BINLOG_FORMAT = STATEMENT`), PostgreSQL replaced the DB-backend. Feels faster too.  
 Data is stored in a separate data-only container.
@@ -30,7 +30,7 @@ The new container can be run from here. Remember to use the volume from "datasto
 
     docker run -d --name postgresql -e USER="super" -e DB="jiradb" -e PASS="p4ssw0rd" --volumes-from datastore paintedfox/postgresql
 
-### 3. Create the JIRA-container
+### 3. Start the JIRA-container
 
     docker run -d --name jira -p 8080:8080 --link postgresql:db hbokh/docker-jira-postgresql
 
