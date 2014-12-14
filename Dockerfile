@@ -15,19 +15,10 @@ RUN apt-get update -qq && \
 ADD install-jira.sh /root/install-jira.sh
 RUN /root/install-jira.sh
 
-## Install SSH for a specific user (thanks to public key)
-ADD ./config/id_rsa.pub /tmp/your_key
-RUN cat /tmp/your_key >> /root/.ssh/authorized_keys && rm -f /tmp/your_key
-
-# Add private key in order to get access to private repo
-ADD ./config/id_rsa /root/.ssh/id_rsa
-
 # Launching Jira
+# And add start script in my_init.d of Phusion baseimage
 WORKDIR /opt/jira-home
-RUN rm -f /opt/jira-home/.jira-home.lock
-
-# Add start script in my_init.d of phusion baseimage
-RUN mkdir -p /etc/my_init.d
+RUN rm -f /opt/jira-home/.jira-home.lock && mkdir -p /etc/my_init.d
 ADD ./start-jira.sh /etc/my_init.d/start-jira.sh
 
 CMD  ["/sbin/my_init"]
