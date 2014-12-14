@@ -3,13 +3,12 @@ FROM phusion/baseimage:0.9.15
 MAINTAINER bokh@xs4all.nl
 
 RUN apt-get update -qq && \
-    apt-get install -qqy git-core software-properties-common python-software-properties && \
+    apt-get install -qqy software-properties-common python-software-properties && \
     apt-add-repository ppa:webupd8team/java -y && \
     apt-get update -qq && \
     echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
     apt-get install -y oracle-java7-installer && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    mkdir /srv/www
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Jira
 ADD install-jira.sh /root/install-jira.sh
