@@ -8,7 +8,7 @@ Most of this is based on [HouseOfAgile/docker-jira](https://github.com/HouseOfAg
 
 ### 1. Create a data-only container
 
-Create a data-only container from Busybox (very small footprint):
+Create a data-only container from Busybox (very small footprint) and name it "datastore":
 
     docker run -v /data --name=datastore -d busybox echo "PSQL Data"
     
@@ -24,7 +24,7 @@ Change line 3 `FROM phusion/baseimage:0.9.13` into `FROM phusion/baseimage:0.9.1
 
     docker build --rm=true -t paintedfox/postgresql .
 
-New container can be run from here:
+The new container can be run from here. Remember to use the volume from "datastore":
 
     docker run -d --name postgresql -e USER="super" -e DB="jiradb" -e PASS="p4ssw0rd" --volumes-from datastore paintedfox/postgresql
 
@@ -39,7 +39,7 @@ Check file `crane.yml` and use `crane lift` to start the containers.
 
 ## Next
 
-Connect to http:// < container IP >:8080/ and setup JIRA.  
+Connect to `http:// < container IP >:8080/` and setup JIRA.  
 With the above set credentials, hostname is "db", database is named "jiradb", user is "super" and password is "p4ssw0rd".
 
 ![image](https://raw.githubusercontent.com/hbokh/docker-jira-postgresql/master/JIRA-Set_Up_Database.png)
