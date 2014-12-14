@@ -13,7 +13,7 @@ Create a data-only container from Busybox (very small footprint) and name it "da
 
     docker run -v /data --name=datastore -d busybox echo "PSQL Data"
     
-Remember, data-only containers don't need to run / be active to be used.    
+**NOTE**: data-only containers don't have to run / be active to be used.    
 
 ### 2. Create a PostgreSQL-container
 
