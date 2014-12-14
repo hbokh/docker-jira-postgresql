@@ -1,6 +1,6 @@
 # Dockerized JIRA on PostgreSQL
 
-Atlassian [JIRA](https://www.atlassian.com/software/jira), v6.3.x, PostgreSQL and data-volume.
+Atlassian [JIRA](https://www.atlassian.com/software/jira), v6.3.x, with PostgreSQL and data-volume.
 
 Most of this is based on [HouseOfAgile/docker-jira](https://github.com/HouseOfAgile/docker-jira), but since there were too many issues with MySQL (e.g. `impossible to write to binary log since BINLOG_FORMAT = STATEMENT`), PostgreSQL replaced the DB-backend. Feels faster too.  
 Data is stored in a separate data-only container.
@@ -36,7 +36,7 @@ The new container can be run from here. Remember to use the volume from "datasto
 
 ## Using Crane to lift containers
 
-I am starting to prefer "[crane](https://github.com/michaelsauter/crane)" over "fig" to start multiple containers.  
+I prefer "[crane](https://github.com/michaelsauter/crane)" over "fig" to start multiple containers.  
 Check file `crane.yml` and use `crane lift` to start the containers.
 
 ## Next
