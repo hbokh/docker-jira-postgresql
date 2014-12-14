@@ -16,15 +16,16 @@ Remember, data-only containers don't need to run / be active to be used.
 
 ### 2. Create a PostgreSQL-container
 
-Used image is [paintedfox/postgresql](https://registry.hub.docker.com/u/paintedfox/postgresql/), but due to [this bug](https://github.com/Painted-Fox/docker-postgresql/issues/30), I had to rebuild a new image from paintedfox/postgresql, based on `phusion/baseimage:0.9.15`.
+Used image is [paintedfox/postgresql](https://registry.hub.docker.com/u/paintedfox/postgresql/), but due to [this bug](https://github.com/Painted-Fox/docker-postgresql/issues/30), I had to rebuild a new image from paintedfox/postgresql, based on `phusion/baseimage:0.9.15`.  
+To rebuild, first clone the repository:
 
     git clone https://github.com/Painted-Fox/docker-postgresql.git
 
-Change line 3 `FROM phusion/baseimage:0.9.13` into `FROM phusion/baseimage:0.9.15` and start a build:
+Next, change line 3 `FROM phusion/baseimage:0.9.13` into `FROM phusion/baseimage:0.9.15` and start a build:
 
     docker build --rm=true -t paintedfox/postgresql .
 
-The new container can be run from here. Remember to use the volume from "datastore":
+The new container can be run from here. Remember to use the volume from "datastore". Environment-variables can be changed to whatever you like. 
 
     docker run -d --name postgresql -e USER="super" -e DB="jiradb" -e PASS="p4ssw0rd" --volumes-from datastore paintedfox/postgresql
 
