@@ -6,7 +6,7 @@ containers:
         volumes-from: ["datastore"]
         detach: true
   jira: 
-    image: hbokh/docker-jira
+    image: hbokh/docker-jira-postgresql
     run:
         publish: ["8080:8080"]
         link: ["postgresql:db"]
