@@ -1,8 +1,9 @@
 # Docker JIRA on PostgreSQL
 
-Containers with the latest Atlassian [JIRA](https://www.atlassian.com/software/jira).  
+Three containers with Atlassian [JIRA](https://www.atlassian.com/software/jira), v6.3.x, PostgreSQL and data-volume.
 
-Most of this is based on [HouseOfAgile/docker-jira](https://github.com/HouseOfAgile/docker-jira), but since there were too many issues with MySQL (e.g. `impossible to write to binary log since BINLOG_FORMAT = STATEMENT`), PostgreSQL replaced the DB-backend. Feels faster too.
+Most of this is based on [HouseOfAgile/docker-jira](https://github.com/HouseOfAgile/docker-jira), but since there were too many issues with MySQL (e.g. `impossible to write to binary log since BINLOG_FORMAT = STATEMENT`), PostgreSQL replaced the DB-backend. Feels faster too.  
+Data is stored in a separate data-only container.
 
 ## Steps
 
@@ -44,6 +45,8 @@ Connect to `http:// < container IP >:8080/` and setup JIRA.
 With the above set credentials, hostname is "db", database is named "jiradb", user is "super" and password is "p4ssw0rd".
 
 ![image](https://raw.githubusercontent.com/hbokh/docker-jira-postgresql/master/JIRA-Set_Up_Database.png)
+
+Finish JIRA's setup (register; get an evaluation-key; etc.).
 
 ## Other
 
