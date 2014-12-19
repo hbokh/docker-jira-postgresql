@@ -2,8 +2,7 @@ FROM phusion/baseimage:0.9.15
 
 MAINTAINER bokh@xs4all.nl
 
-RUN apt-get update -qq && \
-    apt-get install -qqy software-properties-common python-software-properties && \
+RUN apt-get install -qqy software-properties-common python-software-properties && \
     apt-add-repository ppa:webupd8team/java -y && \
     apt-get update -qq && \
     echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
