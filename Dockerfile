@@ -11,13 +11,13 @@ RUN apt-get update -qq && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Jira
-ADD install-jira.sh /root/install-jira.sh
+COPY install-jira.sh /root/install-jira.sh
 RUN /root/install-jira.sh
 
 # Launching Jira
 # And add start script in my_init.d of Phusion baseimage
 WORKDIR /opt/jira-home
 RUN rm -f /opt/jira-home/.jira-home.lock && mkdir -p /etc/my_init.d
-ADD ./start-jira.sh /etc/my_init.d/start-jira.sh
+COPY ./start-jira.sh /etc/my_init.d/start-jira.sh
 
 CMD  ["/sbin/my_init"]
