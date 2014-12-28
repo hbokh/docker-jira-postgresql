@@ -9,9 +9,9 @@ Data is stored in a separate data-only container.
 
 ### 1. Create a data-only container
 
-Create a data-only container from Busybox (very small footprint) and name it "datastore":
+Create a data-only container from Busybox (very small footprint) and name it "jira\_datastore":
 
-    docker run -v /data --name=datastore -d busybox echo "PSQL Data"
+    docker run -v /data --name=jira\_datastore -d busybox echo "PSQL Data"
     
 **NOTE**: data-only containers don't have to run / be active to be used.    
 
@@ -22,17 +22,24 @@ To rebuild, first clone the repository:
 
     git clone https://github.com/Painted-Fox/docker-postgresql.git
 
-Next, change line 3 `FROM phusion/baseimage:0.9.13` into `FROM phusion/baseimage:0.9.15` and start a build:
+Next, in file `Dockerfile` change line 3 `FROM phusion/baseimage:0.9.13` into `FROM phusion/baseimage:0.9.15` and start a build:
 
     docker build --rm=true -t paintedfox/postgresql .
 
-The new container can be run from here. Remember to use the volume from "datastore". Environment-variables can be changed to whatever you like. 
+The new container can be run from here. Remember to use the volume from "jira\_datastore". Environment-variables can be changed to whatever you like. 
 
-    docker run -d --name postgresql -e USER="super" -e DB="jiradb" -e PASS="p4ssw0rd" --volumes-from datastore paintedfox/postgresql
+    docker run -d --name postgresql -e USER="super" -e DB="jiradb" -e PASS="p4ssw0rd" --volumes-from jira\_datastore paintedfox/postgresql
 
 ### 3. Start the JIRA-container
 
     docker run -d --name jira -p 8080:8080 --link postgresql:db hbokh/docker-jira-postgresql
+
+## Build from source
+
+```
+git clone https://github.com/hbokh/docker-jira-postgresql.git
+docker build --rm=true -t hbokh/docker-jira-postgresql .
+```
 
 ## Using Crane to lift containers
 
