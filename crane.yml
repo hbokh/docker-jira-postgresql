@@ -3,7 +3,7 @@ containers:
     image: paintedfox/postgresql
     run:
         env: ["USER=super", "DB=jiradb", "PASS=p4ssw0rd"]
-        volumes-from: ["datastore"]
+        volumes-from: ["jira_datastore"]
         detach: true
   jira: 
     image: hbokh/docker-jira-postgresql
