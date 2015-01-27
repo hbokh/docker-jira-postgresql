@@ -20,4 +20,6 @@ WORKDIR /opt/jira-home
 RUN rm -f /opt/jira-home/.jira-home.lock && mkdir -p /etc/my_init.d
 COPY ./start-jira.sh /etc/my_init.d/start-jira.sh
 
+EXPOSE 8080
+
 CMD  ["/sbin/my_init"]
