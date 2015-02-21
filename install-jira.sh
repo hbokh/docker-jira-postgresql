@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 # Change this when a newer version is released:
-JIRA_VERSION=6.3.12
+JIRA_VERSION=6.3.15
 
 tmpfile=$(mktemp)
 
