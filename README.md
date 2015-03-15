@@ -11,7 +11,7 @@ Data is stored in a separate data-only container.
 
 Create a data-only container from Busybox (very small footprint) and name it "jira\_datastore":
 
-    docker run -v /data --name=jira\_datastore -d busybox echo "PSQL Data"
+    docker run -v /data --name=jira_datastore -d busybox echo "PSQL Data"
 
 **NOTE**: data-only containers don't have to run / be active to be used.
 
