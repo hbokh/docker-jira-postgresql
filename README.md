@@ -22,7 +22,7 @@ To rebuild, first clone the repository:
 
     git clone https://github.com/Painted-Fox/docker-postgresql.git
 
-Next, in file `Dockerfile` change line 3 `FROM phusion/baseimage:0.9.13` into `FROM phusion/baseimage:0.9.15` and start a build:
+Next, in file `Dockerfile` change line 3 `FROM phusion/baseimage:0.9.13` into `FROM phusion/baseimage:latest` and start a build:
 
     docker build --rm=true -t paintedfox/postgresql .
 
