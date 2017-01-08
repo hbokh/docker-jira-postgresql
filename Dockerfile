@@ -1,13 +1,13 @@
-FROM phusion/baseimage:0.9.16
+FROM phusion/baseimage:0.9.18
 
-MAINTAINER bokh@xs4all.nl
+MAINTAINER hbokh
 
 RUN apt-get update -qq && \
     apt-get install -qqy software-properties-common python-software-properties && \
     apt-add-repository ppa:webupd8team/java -y && \
     apt-get update -qq && \
-    echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get install -y oracle-java7-installer && \
+    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
+    apt-get install -y oracle-java8-installer && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Jira

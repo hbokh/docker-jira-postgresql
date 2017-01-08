@@ -1,11 +1,22 @@
 # Dockerized JIRA on PostgreSQL
 
-Atlassian [JIRA](https://www.atlassian.com/software/jira), v6.3.x, with PostgreSQL and data-volume.
+Atlassian [JIRA](https://www.atlassian.com/software/jira), v7.3.x, with PostgreSQL and DOC (Data-Only Container).
 
-Most of this is based on [HouseOfAgile/docker-jira](https://github.com/HouseOfAgile/docker-jira), but since there were too many issues with MySQL (e.g. `impossible to write to binary log since BINLOG_FORMAT = STATEMENT`), PostgreSQL replaced the DB-backend. Feels faster too.  
+Most of the stuff here is based on [HouseOfAgile/docker-jira](https://github.com/HouseOfAgile/docker-jira), but since I had too many issues with MySQL (e.g. `impossible to write to binary log since BINLOG_FORMAT = STATEMENT`), PostgreSQL replaced the DB-backend. It feels faster too.  
 Data is stored in a separate data-only container.
 
-## Steps
+## Get started
+
+### Lift the containers
+
+When "docker-compose" was still known as "fig", I prefered to use "[crane](https://github.com/michaelsauter/crane)" over "fig" to start multiple containers.  
+
+Today, "docker-compose" is preferred, hence the `docker-compose.yml`.  
+Use `docker-compuse up` to start the stack.
+
+If you still want to use "crane", use `crane lift` to start the containers.
+
+## Manual
 
 ### 1. Create a data-only container
 
@@ -16,6 +27,8 @@ Create a data-only container from Busybox (very small footprint) and name it "ji
 **NOTE**: data-only containers don't have to run / be active to be used.
 
 ### 2. Create a PostgreSQL-container
+
+**NOTE**: the issue below was not reproducable in January 2015. 
 
 Used image is [paintedfox/postgresql](https://registry.hub.docker.com/u/paintedfox/postgresql/), but due to [this bug](https://github.com/Painted-Fox/docker-postgresql/issues/30), I had to rebuild a new image from paintedfox/postgresql, based on `phusion/baseimage:0.9.15`.  
 To rebuild, first clone the repository:
@@ -40,11 +53,6 @@ The new container can be run from here. Remember to use the volume from "jira\_d
 git clone https://github.com/hbokh/docker-jira-postgresql.git
 docker build --rm=true -t hbokh/docker-jira-postgresql .
 ```
-
-## Using Crane to lift containers
-
-I prefer "[crane](https://github.com/michaelsauter/crane)" over "fig" to start multiple containers.  
-Check file `crane.yml` and use `crane lift` to start the containers.
 
 ## Next
 
@@ -101,4 +109,5 @@ See more options in the project page https://registry.hub.docker.com/u/jwilder/n
 
 ## Other
 
-Tested with boot2docker on OS X 10.9.5 (Mavericks).
+2017: Tested with Docker for Mac on macOS Sierra 10.12.2.  
+2015: Tested with boot2docker on OS X 10.9.5 (Mavericks).

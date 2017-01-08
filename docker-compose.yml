@@ -1,0 +1,38 @@
+version: '2'
+
+volumes: {}
+
+networks:
+    internal:
+    # external:  # Reserved for load balancer / proxy.
+
+services:
+  jira_datastore:
+    image: busybox
+    volumes:
+      - /data
+    entrypoint: echo "PSQL Data"
+
+  postgresql:
+    image: paintedfox/postgresql
+    container_name: postgresql
+    environment:
+      - USER=super
+      - DB=jiradb
+      - PASS=p4ssw0rd
+    volumes_from :
+      - jira_datastore
+    networks:
+      internal:
+        aliases:
+          - db
+
+  jira:
+    image: hbokh/docker-jira-postgresql
+    container_name: jira
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql 
+    networks:
+      internal:
