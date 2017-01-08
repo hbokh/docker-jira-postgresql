@@ -44,7 +44,7 @@ services:
     image: hbokh/docker-jira-postgresql
     container_name: jira
     environment:
-      - VIRTUAL_HOST=jira.backend
+      - VIRTUAL_HOST=jira.internal
       - PROXY_SCHEME=https
       - PROXY_PORT=443
       - PROXY_SECURED=true
