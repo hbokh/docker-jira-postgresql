@@ -3,10 +3,23 @@ version: '2'
 volumes: {}
 
 networks:
-    backend:
-    # frontend:  # Reserved for load balancer / proxy.
+  backend:
+  frontend:
 
 services:
+  nginx:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx-proxy/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro
+      - ./nginx-proxy/certs/:/etc/nginx/certs
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      frontend:
+
   jira_datastore:
     image: busybox
     volumes:
@@ -30,9 +43,13 @@ services:
   jira:
     image: hbokh/docker-jira-postgresql
     container_name: jira
-    ports:
-      - "8080:8080"
+    environment:
+      - VIRTUAL_HOST=jira.backend
+      - PROXY_SCHEME=https
+      - PROXY_PORT=443
+      - PROXY_SECURED=true
     depends_on:
       - postgresql 
     networks:
       backend:
+      frontend:
