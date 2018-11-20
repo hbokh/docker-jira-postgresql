@@ -21,5 +21,11 @@ pre_start_action() {
 }
 
 pre_start_action
+
+# Ugly workaround after unclean shutdown...
+if [ -f /opt/jira/work/catalina.pid ] ; then
+  rm -f /opt/jira/work/catalina.pid
+fi  
+
 cd /opt/jira/bin
 ./start-jira.sh
